@@ -1,11 +1,7 @@
 package com.hunk.commentcraft.controller;
 
 import com.hunk.commentcraft.model.User;
-import com.hunk.commentcraft.service.UserService;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
-import jakarta.transaction.Transaction;
+import com.hunk.commentcraft.service.UserServiceInterface;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,10 +16,10 @@ import java.util.List;
 @RestController
 public class UserController {
 
-    private UserService userService;
+    private UserServiceInterface userService;
 
     @Autowired
-    public UserController(UserService userService){
+    public UserController(UserServiceInterface userService){
         this.userService = userService;
     }
 

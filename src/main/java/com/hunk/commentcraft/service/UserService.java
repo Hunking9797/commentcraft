@@ -1,24 +1,24 @@
 package com.hunk.commentcraft.service;
 
-import com.hunk.commentcraft.dao.UserImplementation;
+import com.hunk.commentcraft.dao.UserDaoInterface;
 import com.hunk.commentcraft.model.User;
-import jakarta.persistence.TypedQuery;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserService {
+public class UserService implements UserServiceInterface{
 
-    private UserImplementation userDao;
+    private UserDaoInterface userDao;
 
     @Autowired
-    public UserService(UserImplementation userDao){
+    public UserService(UserDaoInterface userDao){
         this.userDao = userDao;
     }
 
+    @Transactional
     public void createUser(User user){
         userDao.createUser(user);
     }

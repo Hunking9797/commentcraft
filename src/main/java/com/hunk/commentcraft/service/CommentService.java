@@ -1,28 +1,31 @@
 package com.hunk.commentcraft.service;
 
-import com.hunk.commentcraft.dao.CommentImplementation;
+import com.hunk.commentcraft.dao.CommentDaoInterface;
 import com.hunk.commentcraft.model.Comment;
 import com.hunk.commentcraft.model.Post;
 import com.hunk.commentcraft.model.User;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class CommentService {
+public class CommentService implements CommentServiceInterface{
 
-    private CommentImplementation commentDao;
+    private CommentDaoInterface commentDao;
 
     @Autowired
-    public CommentService(CommentImplementation commentDao){
+    public CommentService(CommentDaoInterface commentDao){
         this.commentDao = commentDao;
     }
 
+    @Transactional
     public void postComment(Comment comment){
         commentDao.postComment(comment);
     }
 
+    @Transactional
     public void replyToComment(Integer postId, Integer userId, Integer parentCommentId, String content){
         Comment parentComment = commentDao.findCommentById(parentCommentId);
         parentComment.setContent(content);
@@ -37,12 +40,14 @@ public class CommentService {
         commentDao.postComment(parentComment);
     }
 
+    @Transactional
     public void like(Integer commentId){
         Comment comment = commentDao.findCommentById(commentId);
         comment.setLikes(comment.getLikes() + 1);
         commentDao.like(comment);
     }
 
+    @Transactional
     public void dislike(Integer commentId){
         Comment comment = commentDao.findCommentById(commentId);
         comment.setLikes(comment.getLikes() - 1);

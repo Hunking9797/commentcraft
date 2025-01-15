@@ -1,7 +1,7 @@
 package com.hunk.commentcraft.controller;
 
 import com.hunk.commentcraft.model.Post;
-import com.hunk.commentcraft.service.PostService;
+import com.hunk.commentcraft.service.PostServiceInterface;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,10 +16,10 @@ import java.util.List;
 @RestController
 public class PostController {
 
-    private PostService postService;
+    private PostServiceInterface postService;
 
     @Autowired
-    public PostController(PostService postService){
+    public PostController(PostServiceInterface postService){
         this.postService = postService;
     }
 

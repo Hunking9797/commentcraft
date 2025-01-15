@@ -5,12 +5,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Repository
-public class PostImplementation implements PostInterface{
+public class PostDaoImplementation implements PostDaoInterface {
 
 
     private EntityManager entityManager;
@@ -28,7 +27,6 @@ public class PostImplementation implements PostInterface{
     }
 
     @Override
-    @Transactional
     public void createPost(Post post) {
         entityManager.persist(post);
     }

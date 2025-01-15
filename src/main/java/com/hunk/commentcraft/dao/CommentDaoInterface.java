@@ -5,7 +5,7 @@ import com.hunk.commentcraft.model.User;
 
 import java.util.List;
 
-public interface CommentInterface {
+public interface CommentDaoInterface {
 
     public void postComment(Comment comment);
 

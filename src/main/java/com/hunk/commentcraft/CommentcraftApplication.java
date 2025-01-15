@@ -1,8 +1,8 @@
 package com.hunk.commentcraft;
 
-import com.hunk.commentcraft.dao.CommentImplementation;
-import com.hunk.commentcraft.dao.PostImplementation;
-import com.hunk.commentcraft.dao.UserImplementation;
+import com.hunk.commentcraft.dao.CommentDaoImplementation;
+import com.hunk.commentcraft.dao.PostDaoImplementation;
+import com.hunk.commentcraft.dao.UserDaoImplementation;
 import com.hunk.commentcraft.model.Comment;
 import com.hunk.commentcraft.model.Post;
 import com.hunk.commentcraft.model.User;
@@ -19,7 +19,7 @@ public class CommentcraftApplication {
 	}
 
 	@Bean
-	public CommandLineRunner commandLineRunner(UserImplementation userDao, PostImplementation postDao, CommentImplementation commentDao){
+	public CommandLineRunner commandLineRunner(UserDaoImplementation userDao, PostDaoImplementation postDao, CommentDaoImplementation commentDao){
 		return runner -> {
 //			createPost(postDao);
 //			postComment(commentDao,1,1);
@@ -27,7 +27,7 @@ public class CommentcraftApplication {
 		};
 	}
 
-	private void replyToComment(CommentImplementation commentDao, int postId, int userId, int parentCommentId) {
+	private void replyToComment(CommentDaoImplementation commentDao, int postId, int userId, int parentCommentId) {
 		Comment comment = new Comment();
 
 		Comment parentComment = commentDao.findCommentById(parentCommentId);
@@ -42,7 +42,7 @@ public class CommentcraftApplication {
 		commentDao.postComment(comment);
 	}
 
-	private void postComment(CommentImplementation commentDao, int postId, int userId) {
+	private void postComment(CommentDaoImplementation commentDao, int postId, int userId) {
 		Comment comment = new Comment();
 		Post post = commentDao.findPostById(postId);
 		User user = commentDao.findUserById(userId);
@@ -54,7 +54,7 @@ public class CommentcraftApplication {
 		commentDao.postComment(comment);
 	}
 
-	private void createPost(PostImplementation postDao) {
+	private void createPost(PostDaoImplementation postDao) {
 		Post post = new Post();
 		post.setContent("2Lorem ipsum is a sample post.....");
 		post.setTitle("Sample Post2");

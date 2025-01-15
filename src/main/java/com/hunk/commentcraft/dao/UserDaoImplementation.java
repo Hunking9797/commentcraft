@@ -5,22 +5,20 @@ import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.hunk.commentcraft.model.User;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Repository
-public class UserImplementation implements UserInterface{
+public class UserDaoImplementation implements UserDaoInterface {
 
     private EntityManager entityManager;
 
     @Autowired
-    public UserImplementation(EntityManager entityManager) {
+    public UserDaoImplementation(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
     @Override
-    @Transactional
     public void createUser(User user) {
         entityManager.persist(user);
     }

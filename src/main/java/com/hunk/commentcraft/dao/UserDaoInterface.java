@@ -4,7 +4,7 @@ import com.hunk.commentcraft.model.User;
 
 import java.util.List;
 
-public interface UserInterface {
+public interface UserDaoInterface {
     public void createUser(User user);
 
     public List<User> getAllUsers();

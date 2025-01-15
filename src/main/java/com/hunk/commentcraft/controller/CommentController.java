@@ -1,7 +1,7 @@
 package com.hunk.commentcraft.controller;
 
 import com.hunk.commentcraft.model.Comment;
-import com.hunk.commentcraft.service.CommentService;
+import com.hunk.commentcraft.service.CommentServiceInterface;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,10 +17,10 @@ import java.util.List;
 @RestController
 public class CommentController {
 
-    private CommentService commentService;
+    private CommentServiceInterface commentService;
 
     @Autowired
-    public CommentController(CommentService commentService){
+    public CommentController(CommentServiceInterface commentService){
         this.commentService = commentService;
     }
 
@@ -31,6 +31,7 @@ public class CommentController {
     }
 
     @PostMapping("/comments")
+    @Transactional
     public ResponseEntity<String> postComment(@RequestBody Comment comment){
         try{
             commentService.postComment(comment);
